@@ -24,8 +24,8 @@ Apify.main(async () => {
     }
 
     // Launch Chrome
-    const chrome = await launchChrome({ headless: !!process.APIFY_HEADLESS });
-    const client = await CDP();
+    const chrome = await launchChrome({ headless: !!process.env.APIFY_HEADLESS });
+    const client = await CDP({ port: chrome.port });
 
     let currentResult = null;
 
@@ -58,7 +58,6 @@ Apify.main(async () => {
         //console.dir(params);
 
         const req = currentResult.requests[params.requestId];
-        req.loadedUrl = params.response.url;
         req.status = params.response.status;
         req.mimeType = params.response.mimeType;
         req.type = params.type;
@@ -87,6 +86,7 @@ Apify.main(async () => {
     // Iterate and probe all URLs
     const results = [];
     for (let url of input.urls) {
+        console.log(`Navigating to URL: ${url}`);
         currentResult = {
             url,
             requests: {}
@@ -95,6 +95,7 @@ Apify.main(async () => {
 
         await Page.navigate({ url });
         await Page.loadEventFired();
+
         // Wait input.waitSecs seconds
         await new Promise((resolve) => setTimeout(resolve, input.waitSecs*1000 || 0));
         await Page.stopLoading();
@@ -105,16 +106,24 @@ Apify.main(async () => {
 
     // Only useful for local development
     await chrome.kill();
+
+    console.log('Done');
 });
 
 
 // Code inspired by https://developers.google.com/web/updates/2017/04/headless-chrome
 const launchChrome = async (options = {}) => {
-    return await chromeLauncher.launch({
-        port: 9222,
+    console.log('Launching Chrome...');
+    const chrome = await chromeLauncher.launch({
         chromeFlags: [
             options.headless ? '--disable-gpu' : '',
             options.headless ? '--headless' : ''
-        ]
+        ],
+        // logLevel: 'verbose',
     });
+
+    const version = await CDP.Version({port: chrome.port});
+    console.log(`Chrome launched (pid: ${chrome.pid}, port: ${chrome.port}, userAgent: ${version['User-Agent']})`);
+
+    return chrome;
 };

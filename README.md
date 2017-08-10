@@ -33,9 +33,45 @@ Input is a JSON object with the following properties:
 Output is a JSON object such as:
 
 ```javascript
-{
-    pages: [
-      {}
-    ]
-}
+[
+  {
+    "url": "https://www.apifier.com",
+    "requests": {
+      "72.1": {
+        "url": "https://www.apifier.com/",
+        "method": "GET",
+        "requestedAt": "2017-08-10T13:40:39.184Z",
+        "status": 200,
+        "mimeType": "text/html",
+        "type": "Document",
+        "loadedAt": null
+      },
+      "72.2": {
+        "url": "https://cdn.apifier.com/964599760cfc4cc23be6a889c9d825f885cf6af6.css?meteor_css_resource=true",
+        "method": "GET",
+        "requestedAt": "2017-08-10T13:40:39.233Z",
+        "status": 200,
+        "mimeType": "text/css",
+        "type": "Stylesheet",
+        "loadedAt": null
+      },
+      "72.27": {
+        "url": "https://widget.intercom.io/widget/kod1r788",
+        "method": "GET",
+        "requestedAt": "2017-08-10T13:40:40.135Z",
+        "redirects": [
+          {
+            "url": "https://widget.intercom.io/widget/kod1r788",
+            "status": 302,
+            "location": "https://js.intercomcdn.com/shim.585a31ca.js"
+          }
+        ],
+        "status": 200,
+        "mimeType": "application/javascript",
+        "type": "Script",
+        "loadedAt": null
+      }
+    }
+  }
+]
 ```
