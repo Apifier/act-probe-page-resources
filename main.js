@@ -61,7 +61,6 @@ Apify.main(async () => {
         req.status = params.response.status;
         req.mimeType = params.response.mimeType;
         req.type = params.type;
-        req.loadedAt = new Date(params.wallTime * 1000);
     });
 
     Network.loadingFailed((params) => {

@@ -43,8 +43,7 @@ Output is a JSON object such as:
         "requestedAt": "2017-08-10T13:40:39.184Z",
         "status": 200,
         "mimeType": "text/html",
-        "type": "Document",
-        "loadedAt": null
+        "type": "Document"
       },
       "72.2": {
         "url": "https://cdn.apifier.com/964599760cfc4cc23be6a889c9d825f885cf6af6.css?meteor_css_resource=true",
@@ -52,8 +51,7 @@ Output is a JSON object such as:
         "requestedAt": "2017-08-10T13:40:39.233Z",
         "status": 200,
         "mimeType": "text/css",
-        "type": "Stylesheet",
-        "loadedAt": null
+        "type": "Stylesheet"
       },
       "72.27": {
         "url": "https://widget.intercom.io/widget/kod1r788",
@@ -68,8 +66,7 @@ Output is a JSON object such as:
         ],
         "status": 200,
         "mimeType": "application/javascript",
-        "type": "Script",
-        "loadedAt": null
+        "type": "Script"
       }
     }
   }
