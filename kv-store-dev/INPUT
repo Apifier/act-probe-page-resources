@@ -1,0 +1,8 @@
+{
+  "urls": [ "https://www.allstate.com/","https://www.libertymutual.com/" ],
+  "waitSecs": 5,
+  "headers": {
+    "User-Agent": "Something",
+    "X-Test": "123"
+  }
+}

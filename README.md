@@ -30,6 +30,9 @@ Input is a JSON object with the following properties:
     // If set to true, Chrome prints verbose log.
     // By default false.
     verboseLog: Boolean,
+
+    // Optional HTTP headers to use for all requests
+    headers: Object,
 }
 ```
 

@@ -1,0 +1,27 @@
+{
+  "name": "act-probe-page-resources",
+  "version": "0.0.1",
+  "author": {
+    "name": "Jan Curn",
+    "email": "jan@apifier.com",
+    "url": "http://www.apifier.com"
+  },
+  "license": "Apache-2.0",
+  "private": true,
+  "bugs": {
+    "url": "http://www.apifier.com"
+  },
+  "homepage": "http://www.apifier.com",
+  "dependencies": {
+    "apify": "beta",
+    "async": "latest",
+    "chrome-launcher": "latest",
+    "chrome-remote-interface": "latest",
+    "type-check": "latest",
+    "underscore": "latest"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "APIFY_DEV_KEY_VALUE_STORE_DIR=./kv-store-dev/ node main.js"
+  }
+}

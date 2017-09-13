@@ -9,7 +9,8 @@ const typeCheck = require('type-check').typeCheck;
 const INPUT_TYPE = `{
     urls: [String],
     waitSecs: Maybe Number,
-    verboseLog: Maybe Boolean
+    verboseLog: Maybe Boolean,
+    headers: Maybe Object     
 }`;
 
 
@@ -36,8 +37,14 @@ Apify.main(async () => {
     // Extract domains
     const { Network, Page } = client;
 
+    // Add HTTP headers
+    if (input.headers) {
+        await Network.setExtraHTTPHeaders({ headers: input.headers });
+        if (input.headers['User-Agent']) await Network.setUserAgentOverride({ userAgent: input.headers['User-Agent'] });
+    }
+
     // Setup event handlers
-    Network.requestWillBeSent((params) => {
+    await Network.requestWillBeSent((params) => {
         //console.log("### Network.requestWillBeSent");
         //console.dir(params);
 
@@ -57,7 +64,7 @@ Apify.main(async () => {
         }
     });
 
-    Network.responseReceived((params) => {
+    await Network.responseReceived((params) => {
         //console.log("### Network.responseReceived");
         //console.dir(params);
 
@@ -67,7 +74,7 @@ Apify.main(async () => {
         req.type = params.type;
     });
 
-    Network.loadingFailed((params) => {
+    await Network.loadingFailed((params) => {
         //console.log("### Network.loadingFailed");
         //console.dir(params);
 
