@@ -23,8 +23,13 @@ Input is a JSON object with the following properties:
     // Array of URLs to open by the browser.
     urls: [String],
 
-    // Indicates how to long should the browser wait for pending resources after page has been loaded
+    // Indicates how to long should the browser wait for pending resources after page has been loaded.
+    // By default it is 0.
     waitSecs: Number,
+
+    // If set to true, Chrome prints verbose log.
+    // By default false.
+    verboseLog: Boolean,
 }
 ```
 

@@ -8,7 +8,8 @@ const typeCheck = require('type-check').typeCheck;
 // Definition of the input
 const INPUT_TYPE = `{
     urls: [String],
-    waitSecs: Maybe Number
+    waitSecs: Maybe Number,
+    verboseLog: Maybe Boolean
 }`;
 
 
@@ -24,7 +25,10 @@ Apify.main(async () => {
     }
 
     // Launch Chrome
-    const chrome = await launchChrome({ headless: !!process.env.APIFY_HEADLESS });
+    const chrome = await launchChrome({
+        headless: !!process.env.APIFY_HEADLESS,
+        verboseLog: input.verboseLog
+    });
     const client = await CDP({ port: chrome.port });
 
     let currentResult = null;
@@ -119,7 +123,7 @@ const launchChrome = async (options = {}) => {
             options.headless ? '--headless' : '',
             '--no-sandbox',
         ],
-        // logLevel: 'verbose',
+        logLevel: options.verboseLog ? 'verbose' : 'error',
     });
 
     const version = await CDP.Version({port: chrome.port});
