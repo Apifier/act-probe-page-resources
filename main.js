@@ -116,7 +116,8 @@ const launchChrome = async (options = {}) => {
     const chrome = await chromeLauncher.launch({
         chromeFlags: [
             options.headless ? '--disable-gpu' : '',
-            options.headless ? '--headless' : ''
+            options.headless ? '--headless' : '',
+            '--no-sandbox',
         ],
         // logLevel: 'verbose',
     });
